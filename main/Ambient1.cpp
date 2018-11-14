@@ -23,7 +23,7 @@ float Ambient1::getStartleFactor() {
   return 9999999999;
 }
 
-bool Ambient1::rxStartle(uint8_t len, uint8_t* payload) {}
+bool Ambient1::rxStartle(uint8_t len, uint8_t* payload) {return true; // temp}
 
 void Ambient1::PIR() {
   dprintln("PIR triggered!");

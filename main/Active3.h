@@ -13,6 +13,7 @@ class Active3 : public State {
   uint8_t getId();
   const uint8_t* getLocalWeights();
   float getStartleFactor();
+
 private:
   static constexpr uint8_t _localWeights[ACTIVE_STATES + AMBIENT_STATES] = { 0 };
 };

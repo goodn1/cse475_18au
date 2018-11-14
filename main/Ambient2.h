@@ -13,6 +13,9 @@ class Ambient2 : public State {
   uint8_t getId();
   const uint8_t* getLocalWeights();
   float getStartleFactor();
+  bool rxStartle(uint8_t len, uint8_t* payload);
+  void PIR();
+  void startled();
 private:
   static constexpr uint8_t _localWeights[ACTIVE_STATES + AMBIENT_STATES] = { 0 };
 };

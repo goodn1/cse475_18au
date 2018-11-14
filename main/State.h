@@ -12,7 +12,7 @@ class Creature;
 
 class State {
  public:
-  State(Creature& creature, char* const name);
+  State(Creature& creature, char* const name, const uint8_t id);
   State(const State&) = delete;
 
   /**
@@ -41,7 +41,7 @@ class State {
   /**
    * @returns the id of this state from 0x00 to 0xFF.
    */
-  virtual uint8_t getId() = 0;
+  virtual uint8_t getId();
 
   /**
    * @returns name of this state, capped to 12 chars.
@@ -74,7 +74,10 @@ class State {
   /**
    * Called when PIR pin goes from LOW to HIGH.
    */
-  virtual void PIR() = 0;
+  virtual void PIR();
+
+  int* calProb();
+  State* getNewState(int stateNum);
  protected:
   // Packet transmitters
   /**
@@ -112,7 +115,7 @@ class State {
    * Called when this creature is successfully startled. Should set the _creature's
    * _next state to the startle state.
    */
-  virtual void startled() = 0;
+  virtual void startled();
 
 
   /**

@@ -26,7 +26,7 @@ float Startle::getStartleFactor() {
   return 9999999999;
 }
 
-bool Startle::rxStartle(uint8_t len, uint8_t* payload) {}
+bool Startle::rxStartle(uint8_t len, uint8_t* payload) {return true; // temp}
 
 void Startle::PIR() {
   dprintln("PIR triggered!");

@@ -1,7 +1,7 @@
 #include "Ambient3.h"
 #include "Debug.h"
 
-constexpr uint8_t Ambient::_localWeights[];
+constexpr uint8_t Ambient3::_localWeights[];
 
 uint8_t Ambient3::getNumRepeats() {
  return rand()%4 + 4;
@@ -23,7 +23,7 @@ float Ambient3::getStartleFactor() {
   return 9999999999;
 }
 
-bool Ambient3::rxStartle(uint8_t len, uint8_t* payload) {}
+bool Ambient3::rxStartle(uint8_t len, uint8_t* payload) {return true; // temp}
 
 void Ambient3::PIR() {
   dprintln("PIR triggered!");

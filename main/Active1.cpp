@@ -1,18 +1,15 @@
 #include "Active1.h"
 #include "Debug.h"
-
+// active1 is the only one that works - follow template for everything else!!!!
 constexpr uint8_t Active1::_localWeights[];
 
 uint8_t Active1::getNumRepeats() {
  return rand()%4 + 4;
 }
 
-uint8_t Active1::getId() {
-  return 2;
-}
-
 void Active1::loop(uint32_t dt) {
-  Serial.println(F("Active..."));
+  //Serial.println(F("Active..."));
+  
 }
 
 const uint8_t* Active1::getLocalWeights() {
@@ -20,13 +17,5 @@ const uint8_t* Active1::getLocalWeights() {
 }
 
 float Active1::getStartleFactor() {
-  return 9999999999;
+  return 0.0001;
 }
-
-bool Active1::rxStartle(uint8_t len, uint8_t* payload) {}
-
-void Active1::PIR() {
-  dprintln("PIR triggered!");
-}
-
-void Active1::startled() {}

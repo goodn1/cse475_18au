@@ -1,4 +1,4 @@
-#include "Active2.h"
+#include "Active3.h"
 #include "Debug.h"
 
 constexpr uint8_t Active3::_localWeights[];
@@ -23,10 +23,11 @@ float Active3::getStartleFactor() {
   return 9999999999;
 }
 
-bool Active3::rxStartle(uint8_t len, uint8_t* payload) {}
+/*
+bool Active3::rxStartle(uint8_t len, uint8_t* payload) {return true; // temp}
 
 void Active3::PIR() {
   dprintln("PIR triggered!");
 }
 
-void Active3::startled() {}
+void Active3::startled() {}*/

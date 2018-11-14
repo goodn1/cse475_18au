@@ -22,11 +22,3 @@ const uint8_t* Active2::getLocalWeights() {
 float Active2::getStartleFactor() {
   return 9999999999;
 }
-
-bool Active2::rxStartle(uint8_t len, uint8_t* payload) {}
-
-void Active2::PIR() {
-  dprintln("PIR triggered!");
-}
-
-void Active2::startled() {}
