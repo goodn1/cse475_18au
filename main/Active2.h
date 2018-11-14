@@ -6,15 +6,14 @@
 
 class Active2 : public State {
  public:
-  Active2(Creature& creature) : State(creature, "Active") {}
+  Active2(Creature& creature) : State(creature, "Active 2", 4) {}
   uint8_t getNumRepeats();
   void loop(uint32_t dt);
-  uint8_t getId();
   const uint8_t* getLocalWeights();
   float getStartleFactor();
 
 private:
-  static constexpr uint8_t _localWeights[ACTIVE_STATES + AMBIENT_STATES] = { 0 };
+  static constexpr uint8_t _localWeights[ACTIVE_STATES + AMBIENT_STATES] = {1, 5, 1, 2, 1, 3};
 };
 
 #endif  // _ACTIVE_H_

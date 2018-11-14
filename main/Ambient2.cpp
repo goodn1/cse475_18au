@@ -7,12 +7,14 @@ uint8_t Ambient2::getNumRepeats() {
  return rand()%4 + 4;
 }
 
+/*
 uint8_t Ambient2::getId() {
   return 3;
 }
+*/
 
 void Ambient2::loop(uint32_t dt) {
-  Serial.println(F("Ambient..."));
+  //Serial.println(F("Ambient..."));
 }
 
 const uint8_t* Ambient2::getLocalWeights() {
@@ -20,9 +22,10 @@ const uint8_t* Ambient2::getLocalWeights() {
 }
 
 float Ambient2::getStartleFactor() {
-  return 9999999999;
+  return 0.0001;
 }
 
+/*
 bool Ambient2::rxStartle(uint8_t len, uint8_t* payload) {return true; // temp}
 
 void Ambient2::PIR() {
@@ -30,3 +33,4 @@ void Ambient2::PIR() {
 }
 
 void Ambient2::startled() {}
+*/

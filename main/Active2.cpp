@@ -7,12 +7,8 @@ uint8_t Active2::getNumRepeats() {
  return rand()%4 + 4;
 }
 
-uint8_t Active2::getId() {
-  return 4;
-}
-
 void Active2::loop(uint32_t dt) {
-  Serial.println(F("Active..."));
+  //Serial.println(F("Active..."));
 }
 
 const uint8_t* Active2::getLocalWeights() {
@@ -20,5 +16,5 @@ const uint8_t* Active2::getLocalWeights() {
 }
 
 float Active2::getStartleFactor() {
-  return 9999999999;
+  return 0.0001;
 }

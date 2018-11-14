@@ -7,12 +7,14 @@ uint8_t Active3::getNumRepeats() {
  return rand()%4 + 4;
 }
 
+/*
 uint8_t Active3::getId() {
   return 6;
 }
+*/
 
 void Active3::loop(uint32_t dt) {
-  Serial.println(F("Active..."));
+  //Serial.println(F("Active..."));
 }
 
 const uint8_t* Active3::getLocalWeights() {
@@ -20,7 +22,7 @@ const uint8_t* Active3::getLocalWeights() {
 }
 
 float Active3::getStartleFactor() {
-  return 9999999999;
+  return 0.0001;
 }
 
 /*
