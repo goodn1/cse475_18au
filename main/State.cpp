@@ -2,9 +2,11 @@
 #include "State.h"
 #include "Active1.h"
 
+
 State::State(Creature& creature, char* const name, const uint8_t id) : _creature(creature), _id(id) {
   strncpy(_name, name, MAX_NAME_LEN);
 };
+
 
 char* State::getName() {
   return _name;
