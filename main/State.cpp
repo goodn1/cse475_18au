@@ -55,7 +55,7 @@ void State::startled(uint8_t strength, uint8_t id) {
 
 int* State::calProb() {
   // TODO: Implement math to replace this
-  int probabilities [7] = [5, 7, 12, 3, 2, 9, 23];
+  int probabilities [7] = {5, 7, 12, 3, 2, 9, 23};
   return probabilities;
 }
 
