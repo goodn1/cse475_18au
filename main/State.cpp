@@ -59,7 +59,7 @@ void State::startled(uint8_t strength, uint8_t id) {
   //TODO: implement
 }
 
-/*
+
 int* State::calProb() {
   // TODO: Implement math to replace this
   int probabilities [7] = {5, 7, 12, 3, 2, 9, 23};
@@ -72,46 +72,50 @@ State* State::getNewState(int stateNum) {
     // TODO: return states to be filled
     case 1:
       // return wait state
-      return new Wait(creature);
+      return new Wait(_creature);
       
     case 2:
     // return active1
-      return new Active1(creature);
+      return new Active1(_creature);
       
   
     case 3:
       // return active2
-      return new Active2(creature);
+      return new Active2(_creature);
       
   
     case 4:
       // return active3
-     return new Active3(creature);
+     return new Active3(_creature);
     case 5:
       // return ambient1
-      return new Ambient1(creature);
+      return new Ambient1(_creature);
     case 6:
       // return ambient2
-      new Ambient2(creature);
+      new Ambient2(_creature);
     case 7:
       // return ambient3
-      new Ambient3(creature);
+      new Ambient3(_creature);
   }
   return ret;
 }
-*/
+
 
 State* State::transition() {
-  /*
-  int probabilities [7] = calProb();
-  int cumProbabilities [7];
+  
+  //int probabilities [7];
+  //int* probabilitiesPtr = calProb();
+  
+  //int cumProbabilities 
   int stateNum = 0;
-  cumProbabilities = probabilities;
-  for (int i = 1; i < probabilities.length(); i++) {
+  //int* cumProbabilities = probabilitiesPtr;
+  int probabilities [7] = {5, 7, 12, 3, 2, 9, 23};
+  int cumProbabilities [7] = {5, 7, 12, 3, 2, 9, 23};
+  for (int i = 1; i < sizeof(probabilities)/sizeof(probabilities[0]); i++) {
     cumProbabilities[i] = cumProbabilities[i - 1] + probabilities[i];
   }
-  int num = rand(0,cumProbabilities[6]);
-  for (int i = cumProbilities.length() - 1; i >= 0; i--) {
+  int num = rand() % cumProbabilities[6];
+  for (int i = sizeof(cumProbabilities)/sizeof(cumProbabilities[0]) - 1; i >= 0; i--) {
     if (num <= cumProbabilities[i]) {
       stateNum = i;
     }
@@ -130,7 +134,7 @@ State* State::transition() {
 //    }
 //  }
   // TODO: implement
-  */
+  
 }
 
 uint8_t* State::getGlobalWeights() {
