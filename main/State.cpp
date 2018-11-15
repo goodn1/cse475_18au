@@ -13,7 +13,7 @@ char* State::getName() {
   return _name;
 }
 
-uint8_t State::getID() {
+uint8_t State::getId() {
   return _id;
 }
 
@@ -35,7 +35,7 @@ bool State::rxPlayEffect(uint8_t len, uint8_t* payload) {
   return true; // temp
 }
 
-bool State::rxStartle(uint8_t len, uint8_t* payload) {
+bool State::rxStartle(int8_t rssi, uint8_t len, uint8_t* payload) {
   // TODO: implement
   return true; // temp
 }
@@ -49,7 +49,7 @@ void State::PIR() {
   //TODO: implement
 }
 
-void State:startled(uint8_t strength, uint8_t id) {
+void State::startled(uint8_t strength, uint8_t id) {
   //TODO: implement
 }
 
