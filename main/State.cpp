@@ -1,6 +1,12 @@
 #include "Creature.h"
 #include "State.h"
-//#include "Active1.h"
+#include "Wait.h"
+#include "Active1.h"
+#include "Active2.h"
+#include "Active3.h"
+#include "Ambient1.h"
+#include "Ambient2.h"
+#include "Ambient3.h"
 
 
 State::State(Creature& creature, char* const name, const uint8_t id) : _creature(creature), _id(id) {
@@ -53,6 +59,7 @@ void State::startled(uint8_t strength, uint8_t id) {
   //TODO: implement
 }
 
+/*
 int* State::calProb() {
   // TODO: Implement math to replace this
   int probabilities [7] = {5, 7, 12, 3, 2, 9, 23};
@@ -92,8 +99,10 @@ State* State::getNewState(int stateNum) {
   }
   return ret;
 }
+*/
 
 State* State::transition() {
+  /*
   int probabilities [7] = calProb();
   int cumProbabilities [7];
   int stateNum = 0;
@@ -121,6 +130,7 @@ State* State::transition() {
 //    }
 //  }
   // TODO: implement
+  */
 }
 
 uint8_t* State::getGlobalWeights() {

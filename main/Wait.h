@@ -10,7 +10,7 @@ class Wait : public State {
   uint8_t getNumRepeats();
   State* transition() override;
   void loop(uint32_t dt);
-  uint8_t getId();
+  //uint8_t getId();
   const uint8_t* getLocalWeights();
   float getStartleFactor();
 protected:
