@@ -108,14 +108,14 @@ class State {
    *
    * @param payload Should be the startle strength and id.
    */
-  virtual bool rxStartle(uint8_t len, uint8_t* payload);
-
+  virtual bool rxStartle(int8_t rssi, uint8_t len, uint8_t* payload);
+  
   // Event handlers
   /**
    * Called when this creature is successfully startled. Should set the _creature's
    * _next state to the startle state.
    */
-  virtual void startled();
+  virtual void startled(uint8_t strength, uint8_t id);
 
 
   /**
@@ -138,6 +138,7 @@ class State {
   uint8_t _globalWeights[ACTIVE_STATES + AMBIENT_STATES] = { 0 };
  private:
   char _name[MAX_NAME_LEN + 1];
+  uint8_t _id;
 };
 
 #endif  // _STATE_H_
