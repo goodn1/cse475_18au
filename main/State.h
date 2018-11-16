@@ -75,7 +75,7 @@ class State {
    * Called when PIR pin goes from LOW to HIGH.
    */
   virtual void PIR();
-
+   virtual bool rxStartle(int8_t rssi, uint8_t len, uint8_t* payload);
   int* calProb();
   State* getNewState(int stateNum);
  protected:
@@ -108,7 +108,7 @@ class State {
    *
    * @param payload Should be the startle strength and id.
    */
-  virtual bool rxStartle(int8_t rssi, uint8_t len, uint8_t* payload);
+ 
   
   // Event handlers
   /**

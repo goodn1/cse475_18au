@@ -3,6 +3,12 @@
 #include "State.h"
 #include "Wait.h"
 #include "Midi.h"
+#include "Active1.h"
+#include "Active2.h"
+#include "Active3.h"
+#include "Ambient1.h"
+#include "Ambient2.h"
+#include "Ambient3.h"
 
 #include <cmath>
 
@@ -20,6 +26,7 @@ inline float getBatteryVoltage() {
 Creature::Creature() {
   // Initialize _next to be the Wait state, so we will immediately transition into it on the first loop.
   _next = new Wait(*this);
+  _prev = nullptr;
   _state = nullptr;
 
   if (KIT_NUM < 0) {
@@ -107,9 +114,16 @@ bool Creature::_rx(uint8_t pid, uint8_t srcAddr, uint8_t len, uint8_t* payload, 
       // TODO: Implement
       return true;
     case PID_BROADCAST_STATES:
+      if (srcAddr != CONTROLLER_ADDR) return false;
+      _rxBroadcastStates(len, payload);
       // TODO: Implement
       return true;
     case PID_STARTLE:
+      if (srcAddr != CONTROLLER_ADDR) return false;
+      _state->rxStartle(rssi, len, payload);
+      return true;
+      // What to do if packet is not valid?
+      
       // TODO: Implement
       return true;
     default:
@@ -120,7 +134,9 @@ bool Creature::_rx(uint8_t pid, uint8_t srcAddr, uint8_t len, uint8_t* payload, 
 }
 
 void Creature::_updateDistance(uint8_t addr, int8_t rssi) {
-  // TODO: implement
+  // TODO: implement -- ask ryan
+
+  _creatureDistances[addr] = (_creatureDistances[addr] + rssi) / 2;
 }
 
 bool Creature::_rxSetGlobals(uint8_t len, uint8_t* payload) {
@@ -180,18 +196,31 @@ void Creature::_rxStop() {
 }
 
 bool Creature::_rxStart(uint8_t len, uint8_t* payload) {
-  if (len != 1) {
+  if (len != 1) { 
     Serial.print(F("Start packet has invalid payload length: "));
     Serial.println(len);
     return false;
   }
   uint8_t mode = payload[0];
+  uint8_t stateID = payload[1];
+
+  if (mode) {
+    _transition(_prev);
+  } else {
+    if (!stateID) {
+     stateID = rand() % 7;
+    } 
+    _transition(fetchState(stateID));
+  }
   // TODO: implement
   return true;
 }
 
 bool Creature::_rxBroadcastStates(uint8_t len, uint8_t* payload) {
-  // TODO: implement
+      
+  for (int i = 0; i < len; i++) {
+    _creatureStates[i] = payload[i];
+  }
   return true;
 }
 
@@ -306,6 +335,12 @@ void Creature::_transition(State* const state) {
   State* const old = _state;
   _state = state;
 
+  if (_prev != nullptr && _prev != state) {
+    delete _prev;
+  }
+
+  _prev = old;
+    
   if (state != old) {
     if (old != nullptr) {
       delete old;
@@ -403,6 +438,20 @@ void Creature::setup() {
 
   pinMode(PIR_PIN, INPUT);
   _PIR = digitalRead(PIR_PIN);
+}
+
+State* Creature::fetchState(uint8_t stateID) {
+  State * res;
+  switch(stateID) {
+    case 1: res = new Wait(*this);
+    case 2: res = new Active1(*this);
+    case 3: res = new Active2(*this);
+    case 4: res = new Active3(*this);
+    case 5: res = new Ambient1(*this);
+    case 6: res = new Ambient2(*this);
+    case 7: res = new Ambient3(*this);
+  }
+  return res;
 }
 
 Creature::~Creature() {

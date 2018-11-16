@@ -8,7 +8,7 @@
 #include "Ambient2.h"
 #include "Ambient3.h"
 
-
+const double startleFactor = 0.6;
 State::State(Creature& creature, char* const name, const uint8_t id) : _creature(creature), _id(id) {
   strncpy(_name, name, MAX_NAME_LEN);
   _name[MAX_NAME_LEN] = 0;
@@ -43,13 +43,22 @@ bool State::rxPlayEffect(uint8_t len, uint8_t* payload) {
 
 bool State::rxStartle(int8_t rssi, uint8_t len, uint8_t* payload) {
   // TODO: implement
-  return true; // temp
+ uint8_t strength = payload[0];
+ uint8_t id = payload[1];
+ double startleWeight = (double) (_creature.GLOBALS.STARTLE_DECAY - rssi) / _creature.GLOBALS.STARTLE_DECAY;
+ double decay = 1 / (1 + exp(-1 * startleWeight)) * startleFactor; 
+ if (decay * strength > _creature.GLOBALS.STARTLE_THRESHOLD) {
+  // startle
+ }
 }
 
-void State::txStartle(uint8_t strength, uint8_t id) {  
-  // TODO: implement
-  
-}
+
+void State::txStartle(uint8_t strength, uint8_t id) {
+  uint8_t payload[2] = {strength, id};
+  _creature.tx((uint8_t)PID_STARTLE, (uint8_t)BROADCAST_ADDR, (uint8_t)2, payload);
+  return;
+  }
+
 
 void State::PIR() {
   //TODO: implement

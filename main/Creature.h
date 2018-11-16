@@ -126,6 +126,8 @@ class Creature {
     return _creatureDistances;
   }
 
+  State* fetchState(uint8_t stateID);
+
   // Run after construction but before loop.
   void setup();
 
@@ -201,7 +203,7 @@ class Creature {
   void _updateDisplay();
 
   /** Current and next state, or null if no next state. */
-  State *_state, *_next;
+  State *_state, *_next, *_prev;
 
   uint8_t _kitNum, _addr;
 
