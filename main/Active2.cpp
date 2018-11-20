@@ -1,14 +1,15 @@
 #include "Active2.h"
 #include "Debug.h"
+#include "Midi.h"
 
 constexpr uint8_t Active2::_localWeights[];
 
 uint8_t Active2::getNumRepeats() {
- return rand()%4 + 4;
+ return rand() % 5 + 4; // 4 - 8 repeats
 }
 
 void Active2::loop(uint32_t dt) {
-  //Serial.println(F("Active..."));
+  Midi::setSound(2);
 }
 
 const uint8_t* Active2::getLocalWeights() {
@@ -16,5 +17,5 @@ const uint8_t* Active2::getLocalWeights() {
 }
 
 float Active2::getStartleFactor() {
-  return 0.0001;
+  return 0.001f;
 }

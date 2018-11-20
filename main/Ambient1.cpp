@@ -1,20 +1,15 @@
 #include "Ambient1.h"
 #include "Debug.h"
+#include "Midi.h"
 
 constexpr uint8_t Ambient1::_localWeights[];
 
 uint8_t Ambient1::getNumRepeats() {
- return rand()%4 + 4;
+ return rand() % 5 + 4; // 4 - 8 repeats
 }
-
-/*
-uint8_t Ambient1::getId() {
-  return 1;
-}
-*/
 
 void Ambient1::loop(uint32_t dt) {
-  //Serial.println(F("Ambient..."));
+Midi::setSound(4);
 }
 
 const uint8_t* Ambient1::getLocalWeights() {
@@ -22,15 +17,5 @@ const uint8_t* Ambient1::getLocalWeights() {
 }
 
 float Ambient1::getStartleFactor() {
-  return 0.0001;
+  return 0.001f;
 }
-
-/*
-bool Ambient1::rxStartle(uint8_t len, uint8_t* payload) {return true; // temp}
-
-void Ambient1::PIR() {
-  dprintln("PIR triggered!");
-}
-
-void Ambient1::startled() {}
-*/

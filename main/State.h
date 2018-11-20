@@ -63,7 +63,7 @@ class State {
    * is inversely proportional to the number of creatures currently in M. For positive weights, groups of creatures will tend to transition to M.
    * For negative weights, only a few creatures will be in M at the same time.
    */
-  virtual uint8_t* getGlobalWeights();
+  virtual int8_t* getGlobalWeights();
 
   /**
    * @returns This state's startle factor. A value of 1 represents no alteration to the creature's regular threshold.
@@ -75,10 +75,7 @@ class State {
    * Called when PIR pin goes from LOW to HIGH.
    */
   virtual void PIR();
-   virtual bool rxStartle(int8_t rssi, uint8_t len, uint8_t* payload);
-  int* calProb();
-  State* getNewState(int stateNum);
- protected:
+
   // Packet transmitters
   /**
    * Transmit a startle packet.
@@ -108,12 +105,17 @@ class State {
    *
    * @param payload Should be the startle strength and id.
    */
- 
-  
+  virtual bool rxStartle(int8_t rssi, uint8_t len, uint8_t* payload);
+
+ protected:
+
   // Event handlers
   /**
-   * Called when this creature is successfully startled. Should set the _creature's
-   * _next state to the startle state.
+   * Called when this creature is successfully startled. Should test strength vs threshold and possibly enter
+   * startle state and tx a startle packet.
+   *
+   * @param strength    Strength of the startle (higher is stronger).
+   * @param id  Unique identifier for this startle to avoid duplicates.
    */
   virtual void startled(uint8_t strength, uint8_t id);
 
@@ -135,7 +137,8 @@ class State {
   /** Reference to the creature this is a state in */
   Creature& _creature;
 
-  uint8_t _globalWeights[ACTIVE_STATES + AMBIENT_STATES] = { 0 };
+  int8_t _globalWeights[ACTIVE_STATES + AMBIENT_STATES] = { 1, -1, 3, 1, 1, 6 };
+
  private:
   char _name[MAX_NAME_LEN + 1];
   uint8_t _id;

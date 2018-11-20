@@ -4,7 +4,6 @@
 #include <cinttypes>
 
 #include <Adafruit_FeatherOLED.h>
-#include <Adafruit_NeoPixel_ZeroDMA.h>
 #include <RH_RF69.h>
 #include <Wire.h>
 
@@ -18,9 +17,6 @@ class State;
 #define PIR_PIN A1
 #define VBAT_PIN A7
 #define LED_PIN 13
-
-#define NEOPIXEL_PIN 19
-#define NEOPIXEL_COUNT 16
 
 #define OLED_WIDTH 21 // chars
 
@@ -39,6 +35,10 @@ class State;
 #define PID_BROADCAST_STATES 0x5
 #define PID_STARTLE 0x6
 #define PID_SEND_STATE 0x7
+
+#define DISTANCE_ALPHA 0.65
+#define WAIT 0
+#define STARTLE 255
 
 struct Globals {
   uint16_t TX_POWER;
@@ -60,7 +60,6 @@ class Creature {
   ~Creature();
 
   Adafruit_FeatherOLED oled = Adafruit_FeatherOLED();
-  Adafruit_NeoPixel_ZeroDMA strip = Adafruit_NeoPixel_ZeroDMA(NEOPIXEL_COUNT, NEOPIXEL_PIN, NEO_GRBW);
   struct Globals GLOBALS = {
     /* TX_POWER */                  14,   // uint16_t
     /* STARTLE_RAND_MIN */          100,  // uint8_t
@@ -68,9 +67,9 @@ class Creature {
     /* STARTLE_MAX */               255,  // uint8_t
     /* STARTLE_THRESHOLD */         150,  // uint8_t
     /* STARTLE_DECAY */             30,   // uint8_t
-    /* NUM_CREATURES */             30,   // uint8_t
-    /* STARTLE_THRESHOLD_DECAY */   0.9,  // float32
-    /* CYCLE_TIME in ms */          100,  // uint16_t
+    /* NUM_CREATURES */             35,   // uint8_t
+    /* STARTLE_THRESHOLD_DECAY */   0.01,  // float32
+    /* CYCLE_TIME in ms */          1000,  // uint16_t
   };
 
   /**
@@ -114,8 +113,16 @@ class Creature {
     return _lastStartle;
   }
 
-  void setLastStartlee(uint32_t lastStartle) {
+  void setLastStartle(uint32_t lastStartle) {
     _lastStartle = lastStartle;
+  }
+
+  uint8_t getStartleThreshold() {
+    return _startleThreshold;
+  }
+
+  void setStartleThreshold(uint8_t thresh) {
+    _startleThreshold = thresh;
   }
 
   uint8_t* getCreatureStates() {
@@ -126,13 +133,16 @@ class Creature {
     return _creatureDistances;
   }
 
-  State* fetchState(uint8_t stateID);
+  uint8_t updateThreshold();
 
   // Run after construction but before loop.
   void setup();
 
   // Called during main loop.
   void loop();
+
+  State* getState(int id);
+
  private:
   /**
    * Called during loop to poll radio for new received packets. Calls Creature::rx with any
@@ -161,7 +171,7 @@ class Creature {
   /**
    *  Starts the creature by transitioning to the next appropriate state baseed on mode.
    *
-   *  @params payload  Should be mode to start in. 0x8XXX for continue, 0x0000 for random start, 0x00XX for state XX.
+   *  @params payload  Should be start mode and state. Mode 0x01 for continue from _prev, 0x00 for starting at the given state ID.
    */
   bool _rxStart(uint8_t len, uint8_t* payload);
 
@@ -202,7 +212,7 @@ class Creature {
   /** Measures battery voltage and updates OLED. */
   void _updateDisplay();
 
-  /** Current and next state, or null if no next state. */
+  /** Current, next, and previous states, or null if no next state. */
   State *_state, *_next, *_prev;
 
   uint8_t _kitNum, _addr;

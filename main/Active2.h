@@ -1,4 +1,4 @@
-#ifndef _AVTIVE2_H_
+#ifndef _ACTIVE2_H_
 #define _ACTIVE2_H_
 
 #include "Creature.h"
@@ -11,13 +11,8 @@ class Active2 : public State {
   void loop(uint32_t dt);
   const uint8_t* getLocalWeights();
   float getStartleFactor();
-
 private:
-  static constexpr uint8_t _localWeights[ACTIVE_STATES + AMBIENT_STATES] = {1, 5, 1, 2, 1, 3};
+  static constexpr uint8_t _localWeights[ACTIVE_STATES + AMBIENT_STATES] = {1, 1, 1, 1, 1, 1};
 };
 
-#endif  // _ACTIVE_H_
-
-
-
-// State* temp = new Active2(creature);
+#endif  // _ACTIVE2_H_

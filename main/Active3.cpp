@@ -1,20 +1,15 @@
 #include "Active3.h"
 #include "Debug.h"
+#include "Midi.h"
 
 constexpr uint8_t Active3::_localWeights[];
 
 uint8_t Active3::getNumRepeats() {
- return rand()%4 + 4;
+ return rand() % 5 + 4; // 4 - 8 repeats
 }
-
-/*
-uint8_t Active3::getId() {
-  return 6;
-}
-*/
 
 void Active3::loop(uint32_t dt) {
-  //Serial.println(F("Active..."));
+  Midi::setSound(3);
 }
 
 const uint8_t* Active3::getLocalWeights() {
@@ -22,14 +17,5 @@ const uint8_t* Active3::getLocalWeights() {
 }
 
 float Active3::getStartleFactor() {
-  return 0.0001;
+  return 0.001f;
 }
-
-/*
-bool Active3::rxStartle(uint8_t len, uint8_t* payload) {return true; // temp}
-
-void Active3::PIR() {
-  dprintln("PIR triggered!");
-}
-
-void Active3::startled() {}*/
