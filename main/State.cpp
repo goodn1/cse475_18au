@@ -17,27 +17,27 @@ char* State::getName() {
 
 void State::playSound(uint8_t sound_idx) {
   switch (sound_idx) {
-    case 0:
-      Serial.println("Playing sound 0...");
-      Midi::setSound(0);
-    case 1:
-      Serial.println("Playing sound 1...");
-      Midi::setSound(1);
-    case 2:
-      Serial.println("Playing sound 2...");
-      Midi::setSound(2);
-    case 3:
-      Serial.println("Playing sound 3...");
-      Midi::setSound(3);
-    case 4:
-      Serial.println("Playing sound 4...");
-      Midi::setSound(4);
-    case 5:
-      Serial.println("Playing sound 5...");
-      Midi::setSound(5);
-    case 6:
-      Serial.println("Playing sound 6...");
-      Midi::setSound(6);
+//    case 0:
+//      Serial.println("Playing startle sound...");
+//      Midi::setSound(0);
+//    case 1:
+//      Serial.println("Playing ambient1 sound...");
+//      Midi::setSound(1);
+//    case 2:
+//      Serial.println("Playing ambient2 sound...");
+//      Midi::setSound(2);
+//    case 3:
+//      Serial.println("Playing ambient3 sound...");
+//      Midi::setSound(3);
+//    case 4:
+//      Serial.println("Playing active1 sound...");
+//      Midi::setSound(4);
+//    case 5:
+//      Serial.println("Playing active2 sound...");
+//      Midi::setSound(5);
+//    case 6:
+//      Serial.println("Playing active3 sound...");
+//      Midi::setSound(6);
     default:
       Serial.print("No sound of ID ");
       Serial.println(sound_idx);

@@ -11,7 +11,8 @@ uint8_t Ambient1::getNumRepeats() {
 }
 
 void Ambient1::loop(uint32_t dt) {
-Midi::setSound(4);
+//Midi::setSound(4);
+  Midi::setSound(18);
 }
 
 const uint8_t* Ambient1::getLocalWeights() {

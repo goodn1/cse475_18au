@@ -2,6 +2,21 @@
 #include "Midi.h"
 
 // Define your new Midi sounds here! Make sure to add them to the header and Midi::SOUNDS.
+Sound Midi::rain(
+    VS1053_BANK_MELODY,
+    100,
+    127,
+    false,
+    1,
+    (uint8_t[]) {110},
+    (uint8_t[]) {50},
+    0,
+    1
+);
+
+
+
+// Bird sounds from skeleton code
 Sound Midi::scale(
     VS1053_BANK_MELODY,
     VS1053_GM1_CELLO,
@@ -22,7 +37,7 @@ Sound Midi::bbwa(
     (uint8_t[]) {110, 108, 106, 112, 111, 110, 109, 108, 105, 109, 112, 114, 113, 114, 113, 112, 111, 108, 106, 104,
                  107, 115, 114, 115, 116, 115, 116, 115, 116, 115},
     (uint8_t[]) {21, 14, 7, 7, 10, 38, 3, 4, 3, 4, 3, 4, 3, 4, 7, 13, 18, 3, 3, 4, 4, 10, 4, 27, 4, 7, 3, 3, 4, 3},
-    -20,
+    0,
     1
 );
 
