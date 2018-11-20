@@ -5,7 +5,9 @@
 constexpr uint8_t Startle::_localWeights[];
 
 uint8_t Startle::getNumRepeats() {
- return rand() % 4 + 1; // 1 - 4
+ int min = 4;
+ int max = 8;
+ return rand() % (max-min+1) + min; // 4 - 8 repeats
 }
 
 void Startle::loop(uint32_t dt) {

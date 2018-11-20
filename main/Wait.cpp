@@ -13,7 +13,6 @@ State* Wait::transition() {
   Neopixel::setLight(Neopixel::getLight() ? 0 : 1);
   return this;
 }
-*/
 
 void Wait::loop(uint32_t dt) {
 //  dprintln(F("Waiting..."));

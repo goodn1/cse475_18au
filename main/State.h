@@ -31,6 +31,7 @@ class State {
    */
   virtual State* transition();
 
+
   /**
    * Called every GLOBALS.CYCLE_TIME ms. Should not perform long actions.
    *

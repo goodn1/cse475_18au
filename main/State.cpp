@@ -15,14 +15,29 @@ char* State::getName() {
   return _name;
 }
 
-uint8_t State::getId() {
-  return _id;
-}
-
 void State::playSound(uint8_t sound_idx) {
   switch (sound_idx) {
     case 0:
       Serial.println("Playing sound 0...");
+      Midi::setSound(0);
+    case 1:
+      Serial.println("Playing sound 1...");
+      Midi::setSound(1);
+    case 2:
+      Serial.println("Playing sound 2...");
+      Midi::setSound(2);
+    case 3:
+      Serial.println("Playing sound 3...");
+      Midi::setSound(3);
+    case 4:
+      Serial.println("Playing sound 4...");
+      Midi::setSound(4);
+    case 5:
+      Serial.println("Playing sound 5...");
+      Midi::setSound(5);
+    case 6:
+      Serial.println("Playing sound 6...");
+      Midi::setSound(6);
     default:
       Serial.print("No sound of ID ");
       Serial.println(sound_idx);
@@ -96,50 +111,41 @@ void State::startled(uint8_t strength, uint8_t id) {
   }
 }
 
-void State::startled(uint8_t strength, uint8_t id) {
-  //TODO: implement
-}
+//
+//int* State::calProb() {
+//  // TODO: Implement math to replace this
+//  int probabilities [7] = {5, 7, 12, 3, 2, 9, 23};
+//  return probabilities;
+//}
 
-
-int* State::calProb() {
-  // TODO: Implement math to replace this
-  int probabilities [7] = {5, 7, 12, 3, 2, 9, 23};
-  return probabilities;
-}
-
-State* State::getNewState(int stateNum) {
-  State* ret;
-  switch(stateNum) {
-    // TODO: return states to be filled
-    case 1:
-      // return wait state
-      return new Wait(_creature);
-
-    case 2:
-    // return active1
-      return new Active1(_creature);
-
-
-    case 3:
-      // return active2
-      return new Active2(_creature);
-
-
-    case 4:
-      // return active3
-     return new Active3(_creature);
-    case 5:
-      // return ambient1
-      return new Ambient1(_creature);
-    case 6:
-      // return ambient2
-      new Ambient2(_creature);
-    case 7:
-      // return ambient3
-      new Ambient3(_creature);
-  }
-  return ret;
-}
+//State* State::getNewState(int stateNum) {
+//  State* ret;
+//  switch(stateNum) {
+//    // TODO: return states to be filled
+//    case 1:
+//      // return wait state
+//      return new Wait(_creature);
+//    case 2:
+//    // return active1
+//      return new Active1(_creature);
+//    case 3:
+//      // return active2
+//      return new Active2(_creature);
+//    case 4:
+//      // return active3
+//     return new Active3(_creature);
+//    case 5:
+//      // return ambient1
+//      return new Ambient1(_creature);
+//    case 6:
+//      // return ambient2
+//      new Ambient2(_creature);
+//    case 7:
+//      // return ambient3
+//      new Ambient3(_creature);
+//  }
+//  return ret;
+//}
 
 
 State* State::transition() {

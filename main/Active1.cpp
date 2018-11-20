@@ -5,7 +5,9 @@
 constexpr uint8_t Active1::_localWeights[];
 
 uint8_t Active1::getNumRepeats() {
- return rand() % 5 + 4; // 4 - 8 repeats
+ int min = 4;
+ int max = 8;
+ return rand() % (max-min+1) + min; // 4 - 8 repeats
 }
 
 void Active1::loop(uint32_t dt) {
