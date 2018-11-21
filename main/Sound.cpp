@@ -2,15 +2,26 @@
 #include "Midi.h"
 
 // Define your new Midi sounds here! Make sure to add them to the header and Midi::SOUNDS.
-Sound Midi::rain(
+Sound Midi::thunder(
+  /*
     VS1053_BANK_MELODY,
-    100,
+    128,
     127,
     false,
     1,
-    (uint8_t[]) {110},
-    (uint8_t[]) {50},
-    0,
+    (uint8_t[]) {100},
+    (uint8_t[]) {255},
+    -20,
+    1
+    */
+    VS1053_BANK_MELODY,
+    37,
+    127,
+    false,
+    25,
+    (uint8_t[]) {20, 30, 40, 30, 20, 30, 40, 30, 20, 30, 40, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30},
+    (uint8_t[]) {1, 2, 2, 1, 1, 2, 2, 1, 2, 2, 30, 100, 80, 40, 20, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255},
+    -15,
     1
 );
 

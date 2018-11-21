@@ -55,13 +55,13 @@ class Midi {
   static Sound indigobu;
   static Sound mowa;
   static Sound wiwa;
-  static Sound rain;
+  static Sound thunder;
 
   /** Array of all sounds, in a fixed order, used to assign an index to each. Add your sounds to this! */
   static constexpr Sound *SOUNDS[] =
       {nullptr, &Midi::scale, &Midi::bbwa, &Midi::bpwa, &Midi::brcr, &Midi::cardinal, &Midi::indigobu, &Midi::junco,
        &Midi::mowa, &Midi::oriole, &Midi::osprey, &Midi::oven, &Midi::songspar, &Midi::towhee, &Midi::tuftedti,
-       &Midi::veery, &Midi::whthsprw, &Midi::wiwa, &Midi::rain};
+       &Midi::veery, &Midi::whthsprw, &Midi::wiwa, &Midi::thunder};
        
 
        
