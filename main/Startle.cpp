@@ -11,6 +11,7 @@ uint8_t Startle::getNumRepeats() {
 }
 
 void Startle::loop(uint32_t dt) {
+  Midi::setSound(18);
 }
 
 const uint8_t* Startle::getLocalWeights() {

@@ -19,6 +19,8 @@
 #define VS1053_GM1_OCARINA 80
 #define VS1053_GM1_SLAP_BASS_1 36
 #define VS1053_GM1_CELLO 43
+#define VS1053_GM2_ELECTRIC_SNARE 40
+#define VS1053_GM1_APPLAUSE 127
 
 #define MIDI_NOTE_ON  0x90
 #define MIDI_NOTE_OFF 0x80
@@ -56,12 +58,14 @@ class Midi {
   static Sound mowa;
   static Sound wiwa;
   static Sound thunder;
+  static Sound rain;
+
 
   /** Array of all sounds, in a fixed order, used to assign an index to each. Add your sounds to this! */
   static constexpr Sound *SOUNDS[] =
       {nullptr, &Midi::scale, &Midi::bbwa, &Midi::bpwa, &Midi::brcr, &Midi::cardinal, &Midi::indigobu, &Midi::junco,
        &Midi::mowa, &Midi::oriole, &Midi::osprey, &Midi::oven, &Midi::songspar, &Midi::towhee, &Midi::tuftedti,
-       &Midi::veery, &Midi::whthsprw, &Midi::wiwa, &Midi::thunder};
+       &Midi::veery, &Midi::whthsprw, &Midi::wiwa, &Midi::thunder, &Midi::rain};
        
 
        

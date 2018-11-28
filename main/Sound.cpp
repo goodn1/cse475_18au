@@ -2,27 +2,26 @@
 #include "Midi.h"
 
 // Define your new Midi sounds here! Make sure to add them to the header and Midi::SOUNDS.
-Sound Midi::thunder(
-  /*
+// To create Startle, play thunder followed by rain
+Sound Midi::thunder( //Startle
     VS1053_BANK_MELODY,
     128,
     127,
     false,
-    1,
-    (uint8_t[]) {100},
-    (uint8_t[]) {255},
-    -20,
-    1
-    */
+    4,
+    (uint8_t[]) {100, 95, 35, 30},
+    (uint8_t[]) {30, 80, 30, 200}
+);
+
+Sound Midi::rain( //Part of startle/ambient
     VS1053_BANK_MELODY,
-    37,
+    //VS1053_BANK_DRUMS1,
+    VS1053_GM1_APPLAUSE,
     127,
     false,
-    25,
-    (uint8_t[]) {20, 30, 40, 30, 20, 30, 40, 30, 20, 30, 40, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30},
-    (uint8_t[]) {1, 2, 2, 1, 1, 2, 2, 1, 2, 2, 30, 100, 80, 40, 20, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255},
-    -15,
-    1
+    4,
+    (uint8_t[]) {99, 98, 97, 98},
+    (uint8_t[]) {255,255,255,255}
 );
 
 

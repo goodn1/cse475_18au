@@ -11,7 +11,7 @@ uint8_t Active1::getNumRepeats() {
 }
 
 void Active1::loop(uint32_t dt) {
-  Midi::setSound(15);
+  Midi::setSound(18);
 }
 
 const uint8_t* Active1::getLocalWeights() {
