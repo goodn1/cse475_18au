@@ -5,13 +5,11 @@
 constexpr uint8_t Active2::_localWeights[];
 
 uint8_t Active2::getNumRepeats() {
- int min = 4;
- int max = 8;
- return rand() % (max-min+1) + min; // 4 - 8 repeats
+ return rand() % 5 + 4; // 4 - 8 repeats
 }
 
 void Active2::loop(uint32_t dt) {
-  Midi::setSound(18);
+  Midi::setSound(2);
 }
 
 const uint8_t* Active2::getLocalWeights() {

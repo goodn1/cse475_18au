@@ -3,13 +3,10 @@
 constexpr uint8_t Startle::_localWeights[];
 
 uint8_t Startle::getNumRepeats() {
- int min = 4;
- int max = 8;
- return rand() % (max-min+1) + min; // 4 - 8 repeats
+ return rand() % 4 + 1; // 1 - 4
 }
 
 void Startle::loop(uint32_t dt) {
-  Midi::setSound(18);
 }
 
 const uint8_t* Startle::getLocalWeights() {
