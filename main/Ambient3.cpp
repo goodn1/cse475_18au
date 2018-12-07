@@ -5,14 +5,14 @@
 
 constexpr uint8_t Ambient3::_localWeights[];
 
-//int8_t _localWeights[ACTIVE_STATES + AMBIENT_STATES] = { 2, 1, 5, 7, 3, 2 };
-
 uint8_t Ambient3::getNumRepeats() {
  return rand() % 5 + 4; // 4 - 8 repeats
 }
 
 void Ambient3::loop(uint32_t dt) {
-  Midi::setSound(15); //wind
+  //Midi::setSound(15); //wind
+  uint8_t soundIdx = rand() % 4 + 0x15; // Random number between 0x15-0x18.
+  Midi::setSound(soundIdx);
   Neopixel::setLight(0x0A); //wind
 }
 

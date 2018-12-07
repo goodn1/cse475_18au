@@ -6,11 +6,13 @@
 constexpr uint8_t Active1::_localWeights[];
 
 uint8_t Active1::getNumRepeats() {
- return rand() % 5 + 4; // 4 - 8 repeats
+ return rand() % 5 + 3; // 3 - 7 repeats
 }
 
 void Active1::loop(uint32_t dt) {
-  Midi::setSound(0x01); // birds
+  //Midi::setSound(0x01); // birds 
+  uint8_t soundIdx = rand() % 17 + 0x01; // Random number between 1-17.
+  Midi::setSound(soundIdx);
   Neopixel::setLight(0x0B); // Blink dot
 }
 

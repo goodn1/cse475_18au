@@ -5,14 +5,14 @@
 
 constexpr uint8_t Active2::_localWeights[];
 
-//int8_t _localWeights[ACTIVE_STATES + AMBIENT_STATES] = { 2, 5, -1, 4, 3, -6};
-
 uint8_t Active2::getNumRepeats() {
  return rand() % 5 + 4; // 4 - 8 repeats
 }
 
 void Active2::loop(uint32_t dt) {
-  Midi::setSound(0x21); // bells 1
+  //Midi::setSound(0x21); // bells 1
+  uint8_t soundIdx = rand() % 4 + 0x21; // Random number between 0x21-0x24.
+  Midi::setSound(soundIdx);
   Neopixel::setLight(0x04); // bell
 }
 
