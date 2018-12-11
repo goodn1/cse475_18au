@@ -3,17 +3,24 @@
 #include "Midi.h"
 #include "Neopixel.h"
 
+// Birds
+
 constexpr uint8_t Active1::_localWeights[];
 
 uint8_t Active1::getNumRepeats() {
- return rand() % 5 + 3; // 3 - 7 repeats
+ return random(10, 15);
 }
 
 void Active1::loop(uint32_t dt) {
-  //Midi::setSound(0x01); // birds 
-  uint8_t soundIdx = rand() % 17 + 0x01; // Random number between 1-17.
-  Midi::setSound(soundIdx);
-  Neopixel::setLight(0x0B); // Blink dot
+  // Sounds
+  if (random(0, 10) <= 6) {
+    Midi::setSound(random(0x01,0x12));
+  } 
+
+  // Effects
+  uint16_t effects[] = {0x10, 0x11};
+  uint16_t effectSize = 0x02; 
+  Neopixel::setLight(effects[random(0x00, effectSize)]);
 }
 
 const uint8_t* Active1::getLocalWeights() {

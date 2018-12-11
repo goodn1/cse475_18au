@@ -2,16 +2,15 @@
 #include "Midi.h"
 #include "Neopixel.h"
 
-
 constexpr uint8_t Startle::_localWeights[];
 
 uint8_t Startle::getNumRepeats() {
- return rand() % 4 + 1; // 1 - 4
+  return rand() % 4 + 1; // 1 - 4
 }
 
 void Startle::loop(uint32_t dt) {
-  Midi::setSound(0x12); // thunder
-  Neopixel::setLight(0x09); // lightning 
+  Midi::setSound(0x27, true);
+  Neopixel::setLight(0x03);
 }
 
 const uint8_t* Startle::getLocalWeights() {
@@ -22,8 +21,4 @@ float Startle::getStartleFactor() {
   return 9999999999;
 }
 
-bool Startle::rxStartle(uint8_t len, uint8_t* payload) {}
-
-void Startle::PIR() {}
-
-void Startle::startled() {}
+void Startle::startled(uint8_t strength, uint8_t id) {}

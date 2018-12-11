@@ -17,7 +17,7 @@
 // TODO: put your kit number here
 #define KIT_NUM 1
 
-#define VERSION "2.3"
+#define VERSION "3.0"
 
 // Returns current battery voltage
 inline float getBatteryVoltage() {
@@ -54,9 +54,17 @@ void Creature::loop() {
 
   _pollRadio();
 
-  // Only trigger state loops and transitions every CYCLE_TIME ms
-  if (dt > GLOBALS.CYCLE_TIME) {
+  if (_next != NULL) {
+    // We have a predefined next state, transition immediately
+    _transition(_next);
+    _next = nullptr;
+
+    _state->loop(dt);
+
+    _lastLoop = thisLoop;
     _updateDisplay();
+  } else if (dt > GLOBALS.CYCLE_TIME) {
+    // Only trigger state loops and transitions every CYCLE_TIME ms
 
     // Some helpful printlns
     /*for (int i = 0; i < GLOBALS.NUM_CREATURES + 1; i++) {
@@ -76,11 +84,7 @@ void Creature::loop() {
     dprint("/");
     dprintln("255");*/
 
-    if (_next != NULL) {
-      // We have a predefined next state, transition immediately
-      _transition(_next);
-      _next = nullptr;
-    } else if (_remainingRepeats > 0) {
+    if (_remainingRepeats > 0) {
       // This state should be repeated more. Call loop and decrement
       _state->loop(dt);
       _remainingRepeats--;
@@ -91,6 +95,7 @@ void Creature::loop() {
     }
 
     _lastLoop = thisLoop;
+    _updateDisplay();
   }
 
   Neopixel::loop();
@@ -100,11 +105,13 @@ void Creature::loop() {
   if (newPIR && !_PIR) {
     // Rising edge trigger
     dprintln(F("PIR triggered"));
+    digitalWrite(LED_PIN, HIGH);
     _state->PIR();
     _PIR = newPIR;
   } else if (!newPIR && _PIR) {
     // Falling edge
     dprintln(F("PIR reset"));
+    digitalWrite(LED_PIN, LOW);
     _PIR = newPIR;
   }
 }
@@ -400,6 +407,9 @@ void Creature::_transition(State* const state) {
       delete _prev;
     }
 
+    Midi::setSound(0);
+    Neopixel::setLight(0);
+
     _txSendState(old == nullptr ? 0 : old->getId(), state->getId());
     _prev = old;
   } else if (state != old) {
@@ -488,6 +498,7 @@ void Creature::setup() {
 
   pinMode(PIR_PIN, INPUT);
   _PIR = digitalRead(PIR_PIN);
+  digitalWrite(LED_PIN, _PIR);
 }
 
 Creature::~Creature() {

@@ -1,25 +1,32 @@
 #include "Active2.h"
-#include "Debug.h"
 #include "Midi.h"
 #include "Neopixel.h"
+
+// Bells
 
 constexpr uint8_t Active2::_localWeights[];
 
 uint8_t Active2::getNumRepeats() {
- return rand() % 5 + 4; // 4 - 8 repeats
+  return random(4, 9); // 4 - 8
 }
 
 void Active2::loop(uint32_t dt) {
-  //Midi::setSound(0x21); // bells 1
-  uint8_t soundIdx = rand() % 4 + 0x21; // Random number between 0x21-0x24.
-  Midi::setSound(soundIdx);
-  Neopixel::setLight(0x04); // bell
+  // Sounds
+  if (random(0, 10) > 6) {
+    Neopixel::setLight(0x00);
+  } else {
+    Midi::setSound(random(0x21, 0x25));
+    // Effects
+    uint16_t effects[] = {0x04, 0x13};
+    uint16_t effectSize = 0x02; 
+    Neopixel::setLight(effects[random(0x00, effectSize)]);
+  }
 }
 
-const uint8_t* Active2::getLocalWeights() {
+const uint8_t *Active2::getLocalWeights() {
   return this->_localWeights;
 }
 
 float Active2::getStartleFactor() {
-  return 0.001f;
+  return 0.0015f;
 }

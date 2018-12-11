@@ -3,17 +3,21 @@
 #include "Midi.h"
 #include "Neopixel.h"
 
+// Wind
+
 constexpr uint8_t Ambient3::_localWeights[];
 
 uint8_t Ambient3::getNumRepeats() {
- return rand() % 5 + 4; // 4 - 8 repeats
+ return random(4, 12);
 }
 
 void Ambient3::loop(uint32_t dt) {
-  //Midi::setSound(15); //wind
-  uint8_t soundIdx = rand() % 4 + 0x15; // Random number between 0x15-0x18.
-  Midi::setSound(soundIdx);
-  Neopixel::setLight(0x0A); //wind
+  Midi::setSound(0x15, true);
+  
+  // Effects
+  uint16_t effects[] = {0x01, 0x0A};
+  uint16_t effectSize = 2; 
+  Neopixel::setLight(effects[random(0, effectSize)]);
 }
 
 const uint8_t* Ambient3::getLocalWeights() {

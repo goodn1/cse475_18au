@@ -3,17 +3,31 @@
 #include "Midi.h"
 #include "Neopixel.h"
 
+// Insects
+
 constexpr uint8_t Ambient2::_localWeights[];
 
 uint8_t Ambient2::getNumRepeats() {
- return rand() % 5 + 6; // 6 - 10 repeats
+ return random(5, 10);
 }
 
 void Ambient2::loop(uint32_t dt) {
-  //Midi::setSound(29); //insects/crickets
-  uint8_t soundIdx = rand() % 2 + 0x29; // Random number between 0x29-0x2A.
-  Midi::setSound(soundIdx);
-  Neopixel::setLight(0x06); //insects
+  static uint8_t reps = 0;
+
+  // Sounds
+  if (random(0, 10) <= 3) {
+    Midi::setSound(random(0, 3) == 0 ? 0x29 : 0x2B, true);
+    reps = random(3, 6);
+  } else if (reps > 0) {
+    reps--;
+  } else {
+    Midi::setSound(0);
+  }
+
+  // Effects
+  uint16_t effects[] = {0x06, 0x0C};
+  uint16_t effectSize = 2; 
+  Neopixel::setLight(effects[random(0, effectSize)]);
 }
 
 const uint8_t* Ambient2::getLocalWeights() {
